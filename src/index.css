@@ -51,14 +51,13 @@ body {
     @apply absolute left-0 right-0 bg-black-200 backdrop-blur-sm transition-all duration-300 ease-in-out overflow-hidden z-20 mx-auto sm:hidden block;
   }
 
-  /* not use */
-
-  .head-text {
-    @apply sm:text-4xl text-3xl font-semibold bg-gradient-to-r from-[#BEC1CF] from-60% via-[#D5D8EA] via-60% to-[#D5D8EA] to-100% bg-clip-text text-transparent;
-  }
-
   .text-gray_gradient {
     @apply bg-gradient-to-r from-[#BEC1CF] from-60% via-[#D5D8EA] via-60% to-[#D5D8EA] to-100% bg-clip-text text-transparent;
+  }
+
+   /* hero section */
+  .hero_tag {
+    @apply text-center xl:text-6xl md:text-5xl sm:text-4xl text-3xl font-generalsans font-black !leading-normal;
   }
 
   /* button component */
@@ -74,10 +73,17 @@ body {
     @apply relative inline-flex rounded-full h-3 w-3 bg-green-500;
   }
 
-  /* hero section */
-  .hero_tag {
-    @apply text-center xl:text-6xl md:text-5xl sm:text-4xl text-3xl font-generalsans font-black !leading-normal;
+
+  /* not use */
+
+  .head-text {
+    @apply sm:text-4xl text-3xl font-semibold bg-gradient-to-r from-[#BEC1CF] from-60% via-[#D5D8EA] via-60% to-[#D5D8EA] to-100% bg-clip-text text-transparent;
   }
+
+  
+  
+
+ 
 
   /* about section */
   .grid-container {
