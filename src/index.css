@@ -73,17 +73,9 @@ body {
     @apply relative inline-flex rounded-full h-3 w-3 bg-green-500;
   }
 
-
-  /* not use */
-
-  .head-text {
-    @apply sm:text-4xl text-3xl font-semibold bg-gradient-to-r from-[#BEC1CF] from-60% via-[#D5D8EA] via-60% to-[#D5D8EA] to-100% bg-clip-text text-transparent;
+   .copy-container {
+    @apply cursor-pointer flex justify-center items-center gap-2;
   }
-
-  
-  
-
- 
 
   /* about section */
   .grid-container {
@@ -98,9 +90,19 @@ body {
     @apply text-[#afb0b6] text-base font-generalsans;
   }
 
-  .copy-container {
-    @apply cursor-pointer flex justify-center items-center gap-2;
+
+  /* not use */
+
+  .head-text {
+    @apply sm:text-4xl text-3xl font-semibold bg-gradient-to-r from-[#BEC1CF] from-60% via-[#D5D8EA] via-60% to-[#D5D8EA] to-100% bg-clip-text text-transparent;
   }
+
+  
+  
+
+ 
+
+  
 
   /* projects section  */
   /* .arrow-btn {

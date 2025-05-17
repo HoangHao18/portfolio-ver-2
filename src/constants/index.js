@@ -39,3 +39,15 @@ export const calculateSizes = (isSmall, isMobile, isTablet) => {
     robotScale: isSmall? 0.12 : isMobile ? 0.13 : 0.15,
   };
 };
+
+export const aboutInfo = {
+  grid1A:"I'm a Front-End Developer with 3+ years of experience building fast, scalable, and user-focused web applications. Passionate about performance optimization, clean code, and seamless user experiences, I excel in collaborative environments and continuously strive for excellence in web development.",
+  grid1B: "I’m a Front-End Developer with over 3 years of experience creating fast, scalable, and easy-to-use web apps. I’m really into writing clean code, optimizing performance, and making sure users have a smooth experience. I enjoy working with teams and always look for ways to get better at what I do.",
+  grid2: "I have experience building web applications using HTML5, CSS3, JavaScript (ES6+), and TypeScript. Skilled in React.js and modern UI libraries such as Tailwind CSS, Material-UI, Shadcn UI, and Zustand. Familiar with tools like Git, Vite, and Figma."
+}
+
+export const contactInfo = {
+  gmail: "hoanghao18101999@gmail.com"
+}
+
+export const resumeLink = "/assets/HoangThiHao-Resume.pdf"

@@ -1,6 +1,6 @@
 import { Canvas } from '@react-three/fiber'
 import { Suspense } from 'react'
-import CanvasLoader from '../components/CanvasLoader'
+import CanvasLoader from '../components/General/CanvasLoader'
 import { PerspectiveCamera } from '@react-three/drei'
 import RetroComputer from '../components/RetroComputer'
 import { Leva } from 'leva'
