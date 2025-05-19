@@ -7,121 +7,31 @@
 // // */
 
 import { useGLTF } from '@react-three/drei'
-import { useThree } from '@react-three/fiber'
-import { useGesture } from '@use-gesture/react'
-import gsap from 'gsap'
 import { useEffect, useRef } from 'react'
-import * as THREE from 'three'
+import { forwardRef } from 'react'
 
-const VoxelWateringPot = (props) => {
+const VoxelWateringPot = forwardRef((props, groupRef) => {
   const { nodes, materials } = useGLTF('/models/voxel_watering_pot.glb')
-  const groupRef = useRef()
+
   const potRef = useRef()
 
-  const pouringInterval = useRef(null)
-  const waterParticles = useRef([]) // mảng chứa các hạt
-
-  const { size, viewport } = useThree()
-  const initialPos = useRef(props.position || [0, 0, 0])
-
-  // Set vị trí ban đầu
   useEffect(() => {
-    if (groupRef.current) {
-      groupRef.current.position.set(...initialPos.current)
+    if (nodes.Object_2?.geometry) {
+      nodes.Object_2.geometry.center() // Thay đổi tâm tâm bounding box về [0,0,0]
     }
-  }, [props.position])
+  }, [nodes])
 
-  const startPouring = () => {
-    if (!groupRef.current || !potRef.current) return
-
-    if (pouringInterval.current) clearInterval(pouringInterval.current)
-
-    pouringInterval.current = setInterval(() => {
-      const createDrop = (xOffset = 0) => {
-        const geometry = new THREE.BoxGeometry(0.02, 0.1, 0.02)
-        const material = new THREE.MeshStandardMaterial({
-          color: 'skyblue',
-          transparent: true,
-          opacity: 0.7,
-        })
-        const drop = new THREE.Mesh(geometry, material)
-
-        // Lấy vị trí đầu vòi của potRef trong local space của groupRef
-        const localPos = new THREE.Vector3()
-        potRef.current.getWorldPosition(localPos)
-        groupRef.current.worldToLocal(localPos)
-
-        // Offset dòng chính + lệch x theo offset truyền vào
-        localPos.x = localPos.x - initialPos.current[0] + 9.1 + xOffset
-        localPos.y = localPos.y - initialPos.current[1] + 3.9
-        localPos.z = localPos.z - initialPos.current[2] + 0.2
-
-        drop.position.copy(localPos)
-        groupRef.current.add(drop)
-        waterParticles.current.push(drop)
-
-        // Convert targetY từ world sang local
-        const worldTarget = new THREE.Vector3(
-          drop.position.x,
-          props.targetY, // world Y
-          drop.position.z,
-        )
-        groupRef.current.worldToLocal(worldTarget)
-
-        gsap.to(drop.position, {
-          y: worldTarget.y + 0.2,
-          duration: 0.8,
-          ease: 'power1.in',
-          onComplete: () => {
-            groupRef.current.remove(drop)
-            drop.geometry.dispose()
-            drop.material.dispose()
-            waterParticles.current = waterParticles.current.filter((d) => d !== drop)
-          },
-          //check Bee <--
-          //check Bee -->
-        })
-      }
-
-      // Tạo 2 hạt nước: giữa, phải
-      createDrop(0) // chính giữa
-      //createDrop(-0.05) // lệch trái
-      createDrop(0.05) // lệch phải
-    }, 100)
-  }
-
-  const stopPouring = () => {
-    if (pouringInterval.current) {
-      clearInterval(pouringInterval.current)
-      pouringInterval.current = null
-    }
-  }
-
-  const bind = useGesture({
-    onDrag: ({ offset: [x, y], event }) => {
-      event.stopPropagation()
-      if (!groupRef.current) return
-
-      const aspect = size.width / viewport.width
-      const dx = x / aspect
-      const dy = -y / aspect
-
-      gsap.to(groupRef.current.position, {
-        x: initialPos.current[0] + dx,
-        y: initialPos.current[1] + dy,
-        z: initialPos.current[2],
-        duration: 0.3,
-        ease: 'power2.out',
-      })
-    },
-
-    onPointerDown: ({ event }) => {
-      if (event.buttons === 1) startPouring()
-    },
-
-    onPointerUp: stopPouring,
-    onPointerLeave: stopPouring,
-  })
+  // oxyz của group và pot
+  // useEffect(() => {
+  //   if (potRef.current) {
+  //     const axes = new AxesHelper(2) // độ dài của trục
+  //     potRef.current.add(axes) // gắn axes vào object
+  //   }
+  //   if (groupRef.current) {
+  //     const axes = new AxesHelper(2)
+  //     groupRef.current.add(axes)
+  //   }
+  // }, [])
 
   return (
     <group ref={groupRef} {...props}>
@@ -129,12 +39,11 @@ const VoxelWateringPot = (props) => {
         ref={potRef}
         geometry={nodes.Object_2.geometry}
         material={materials.palette}
-        rotation={[-1.55, -0.6, 1.98]}
-        {...bind()} // Gesture gắn vào mesh bình
+        rotation={[1.74, 2.44, 1.38]} //vị trí của pot trong hệ trục của pot
       />
     </group>
   )
-}
+})
 
 useGLTF.preload('/models/voxel_watering_pot.glb')
 export default VoxelWateringPot

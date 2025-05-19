@@ -1,7 +1,12 @@
-import GardenView from '../components/About/GardenView'
+import GardenView from '../components/About/GardenScene'
 import Button from '../components/General/Button'
 import WorldView from '../components/About/WorldView'
 import { aboutInfo, resumeLink } from '../constants'
+import { Canvas } from '@react-three/fiber'
+import { Suspense } from 'react'
+import CanvasLoader from '../components/General/CanvasLoader'
+import GardenScene from '../components/About/GardenScene'
+import { Leva } from 'leva'
 
 const About = () => {
   return (
@@ -75,7 +80,12 @@ const About = () => {
               className="w-full sm:h-[326px] h-fit object-contain"
             /> */}
             <div className="w-full sm:h-[326px] h-fit border-0 border-[#afb0b6] border-dashed">
-              <GardenView />
+              <Leva hidden />
+              <Canvas className="w-full h-full">
+                <Suspense fallback={<CanvasLoader />}>
+                  <GardenScene />
+                </Suspense>
+              </Canvas>
             </div>
 
             <div className="space-y-2">
