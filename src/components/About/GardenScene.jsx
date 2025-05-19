@@ -3,11 +3,13 @@ import { PerspectiveCamera } from '@react-three/drei'
 import VoxelFlowers from '../VoxelFlowers'
 import VoxelWateringPot from '../VoxelWateringPot'
 import VoxelBee from '../VoxelBee'
-import { useRef, useEffect } from 'react'
+import { useRef, useEffect, useState } from 'react'
 import * as THREE from 'three'
 import gsap from 'gsap'
 import { useGesture } from '@use-gesture/react'
 import { createDrop } from '../../utils/createDrop'
+import { animateBeeFly } from '../../utils/animateBeeFly'
+import { useControls } from 'leva'
 
 const GardenScene = () => {
   const { scene, size, viewport, camera } = useThree() // cần có để add/remove drop
@@ -16,6 +18,10 @@ const GardenScene = () => {
 
   const pouringInterval = useRef(null)
   const waterDrops = useRef([])
+
+  const beeRef = useRef()
+  const initialBeePos = useRef([-6.3, -3, -1.6])
+  const [hasBeeFlown, setHasBeeFlown] = useState(false)
 
   // <---handle pouring functions
   // three.js khi xử lý transparent material và geometry reuse: nếu không dùng useRef để giữ geometry/material, mà tạo mới mỗi lần, thì việc render nhiều mesh với cùng vị trí hoặc cùng material có thể bị xung đột hoặc không render như mong muốn.
@@ -74,14 +80,29 @@ const GardenScene = () => {
       const aspect = size.width / viewport.width
       const dx = x / aspect
       const dy = -y / aspect
+      const newX = initialGroupPotPos.current[0] + dx //world space
+      const newY = initialGroupPotPos.current[1] + dy //world space
 
+      //move pot
       gsap.to(groupPotRef.current.position, {
-        x: initialGroupPotPos.current[0] + dx,
-        y: initialGroupPotPos.current[1] + dy,
+        x: newX,
+        y: newY,
         z: initialGroupPotPos.current[2],
         duration: 0.3,
         ease: 'power2.out',
       })
+
+      // check bee
+      const beeWorldPos = new THREE.Vector3() //world space
+      beeRef.current.getWorldPosition(beeWorldPos)
+
+      const isClose = newX - beeWorldPos.x < 1.6
+      console.log('isClose', isClose, { pot: newX, bee: beeWorldPos.x })
+
+      if (isClose && !hasBeeFlown) {
+        setHasBeeFlown(true)
+        animateBeeFly(beeRef)
+      }
     },
     onPointerDown: ({ buttons }) => {
       if (buttons === 1) startPouring()
@@ -90,17 +111,6 @@ const GardenScene = () => {
     onPointerLeave: stopPouring,
   })
   // handle move pot-->
-
-  useEffect(() => {
-    // if (groupPotRef.current) {
-    //   const axes = new THREE.AxesHelper(2) // độ dài của trục
-    //   groupPotRef.current.add(axes) // gắn axes vào object
-    // }
-    // if (groupRef.current) {
-    //   const axes = new AxesHelper(2)
-    //   groupRef.current.add(axes)
-    // }
-  }, [])
 
   return (
     <>
@@ -124,6 +134,14 @@ const GardenScene = () => {
         rotation={[0, Math.PI, 0]}
         position={initialGroupPotPos.current}
         {...bindGroupPotDrag()}
+      />
+
+      <VoxelBee
+        ref={beeRef}
+        scale={0.65}
+        position={initialBeePos.current}
+        rotation={[0.23, 0.75, -0.05]}
+        hasBeeFlown={hasBeeFlown}
       />
     </>
   )

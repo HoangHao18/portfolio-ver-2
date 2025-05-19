@@ -9,17 +9,17 @@ Title: Bee Bzzz 🐝
 import { useEffect, forwardRef } from 'react'
 import { useGLTF, useAnimations } from '@react-three/drei'
 
-const VoxelBee = forwardRef((props, ref) => {
+const VoxelBee = forwardRef(({ hasBeeFlown, ...props }, ref) => {
   const { nodes, materials, animations } = useGLTF('/models/voxel_bee.glb')
   const { actions } = useAnimations(animations, ref)
   useEffect(() => {
     // Chạy tất cả animation
-    if (actions) {
+    if (actions && hasBeeFlown) {
       Object.values(actions).forEach((action) => {
         action.reset().fadeIn(0.5).play()
       })
     }
-  }, [actions])
+  }, [actions, hasBeeFlown])
   return (
     <group ref={ref} {...props} dispose={null}>
       <group name="Sketchfab_Scene">
