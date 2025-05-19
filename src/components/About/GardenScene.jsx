@@ -10,6 +10,7 @@ import { useGesture } from '@use-gesture/react'
 import { createDrop } from '../../utils/createDrop'
 import { animateBeeFly } from '../../utils/animateBeeFly'
 import { useControls } from 'leva'
+import VoxelBulbasaur from '../VoxelBulbasaur'
 
 const GardenScene = () => {
   const { scene, size, viewport, camera } = useThree() // cần có để add/remove drop
@@ -22,6 +23,10 @@ const GardenScene = () => {
   const beeRef = useRef()
   const initialBeePos = useRef([-6.3, -3, -1.6])
   const [hasBeeFlown, setHasBeeFlown] = useState(false)
+
+  const bulbaRef = useRef()
+  const initialBulbaPos = useRef([3.3, -4.3, -0.3])
+  const [hasBulbaGrown, setHasBulbaGrown] = useState(false)
 
   // <---handle pouring functions
   // three.js khi xử lý transparent material và geometry reuse: nếu không dùng useRef để giữ geometry/material, mà tạo mới mỗi lần, thì việc render nhiều mesh với cùng vị trí hoặc cùng material có thể bị xung đột hoặc không render như mong muốn.
@@ -96,18 +101,46 @@ const GardenScene = () => {
       const beeWorldPos = new THREE.Vector3() //world space
       beeRef.current.getWorldPosition(beeWorldPos)
 
-      const isClose = newX - beeWorldPos.x < 1.6
-      console.log('isClose', isClose, { pot: newX, bee: beeWorldPos.x })
+      const isPotCloseBee = newX - beeWorldPos.x < 1.6
 
-      if (isClose && !hasBeeFlown) {
+      if (isPotCloseBee && !hasBeeFlown) {
         setHasBeeFlown(true)
         animateBeeFly(beeRef)
       }
+
+      //check bulba
+      const bulbaWorldPos = new THREE.Vector3() //world space
+      bulbaRef.current.getWorldPosition(bulbaWorldPos)
+
+      const isPotCloseBulba = newX - bulbaWorldPos.x < 1 && newX - bulbaWorldPos.x > -0.8
+
+      if (isPotCloseBulba && !hasBulbaGrown) {
+        setHasBulbaGrown(true)
+        gsap.to(bulbaRef.current.scale, {
+          x: 0.06,
+          y: 0.06,
+          z: 0.06,
+          duration: 1,
+          ease: 'sine.inOut',
+        })
+      } else if (!isPotCloseBulba && hasBulbaGrown) {
+        setHasBulbaGrown(false)
+        gsap.to(bulbaRef.current.scale, {
+          x: 0.02,
+          y: 0.02,
+          z: 0.02,
+          duration: 0.9,
+          ease: 'power2.inOut',
+        })
+      }
     },
+
     onPointerDown: ({ buttons }) => {
       if (buttons === 1) startPouring()
     },
+
     onPointerUp: stopPouring,
+
     onPointerLeave: stopPouring,
   })
   // handle move pot-->
@@ -124,8 +157,8 @@ const GardenScene = () => {
 
       <group>
         <VoxelFlowers scale={3.5} position={[-5, -4, 0]} />
-        <VoxelFlowers scale={3.8} position={[0, -4, 0]} />
-        <VoxelFlowers scale={3.4} position={[5, -4, 0]} />
+        <VoxelFlowers scale={3.6} position={[0, -4, 0]} />
+        <VoxelFlowers scale={3.4} position={[6, -4, 0]} />
       </group>
 
       <VoxelWateringPot
@@ -142,6 +175,13 @@ const GardenScene = () => {
         position={initialBeePos.current}
         rotation={[0.23, 0.75, -0.05]}
         hasBeeFlown={hasBeeFlown}
+      />
+
+      <VoxelBulbasaur
+        ref={bulbaRef}
+        scale={0.02}
+        position={initialBulbaPos.current}
+        rotation={[0.09, 1.46, 0]}
       />
     </>
   )
