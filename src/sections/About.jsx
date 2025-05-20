@@ -1,4 +1,3 @@
-import GardenView from '../components/About/GardenScene'
 import Button from '../components/General/Button'
 import WorldView from '../components/About/WorldView'
 import { aboutInfo, resumeLink } from '../constants'
@@ -6,7 +5,6 @@ import { Canvas } from '@react-three/fiber'
 import { Suspense } from 'react'
 import CanvasLoader from '../components/General/CanvasLoader'
 import GardenScene from '../components/About/GardenScene'
-import { Leva } from 'leva'
 
 const About = () => {
   return (
@@ -44,8 +42,7 @@ const About = () => {
 
         <div className="col-span-1 xl:row-span-4">
           <div className="grid-container">
-            <div className="rounded-3xl w-full sm:h-[370px] h-fit flex justify-center items-center">
-              {/* sm:h-[326px] */}
+            <div className="rounded-3xl w-full xl:h-[370px] lg:h-[248px] md:h-[162px] h-[270px] flex justify-center items-center">
               <WorldView />
             </div>
             <div>
@@ -74,13 +71,11 @@ const About = () => {
 
         <div className="xl:col-span-2 xl:row-span-3">
           <div className="grid-container">
-            {/* <img
-              src="assets/grid3.png"
-              alt="grid-3"
-              className="w-full sm:h-[326px] h-fit object-contain"
-            /> */}
-            <div className="w-full sm:h-[326px] h-fit border-0 border-[#afb0b6] border-dashed">
-              <Leva hidden />
+            <div
+              className="w-full xl:h-[326px] lg:h-[248px] md:h-[162px] sm:h-[290px] sm1:h-[240px] sm2:h-[160px] h-[130px] border border-[#474748] border-dashed bg-cover bg-center bg-no-repeat rounded-lg"
+              style={{ backgroundImage: "url('assets/grid3.png')" }}
+            >
+              {/* <Leva  /> */}
               <Canvas className="w-full h-full">
                 <Suspense fallback={<CanvasLoader />}>
                   <GardenScene />

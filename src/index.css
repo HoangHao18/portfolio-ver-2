@@ -24,6 +24,10 @@ body {
   --color-white-700: #D6D9E9;
   --color-white-500: #62646C;
   --color-white-600: #AFB0B6;
+  /* --breakpoint-md1: 820px; */
+  --breakpoint-sm1: 529px;
+  --breakpoint-sm2: 380px;
+  
   
   /* Background images */
   /* --bg-terminal: url('/assets/terminal.png'); */
@@ -223,3 +227,15 @@ body {
     transform: rotate(0deg);
   }
 }
+
+/* use */
+.custom-dashed-border {
+  border: 3px dashed transparent;
+  border-image: conic-gradient(
+    from 0deg,
+    white 0deg 10deg,
+    transparent 10deg 20deg
+  ) 1;
+}
+
+

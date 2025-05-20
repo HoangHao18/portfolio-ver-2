@@ -3,29 +3,28 @@ import { PerspectiveCamera } from '@react-three/drei'
 import VoxelFlowers from '../VoxelFlowers'
 import VoxelWateringPot from '../VoxelWateringPot'
 import VoxelBee from '../VoxelBee'
-import { useRef, useEffect, useState } from 'react'
+import { useRef, useState } from 'react'
 import * as THREE from 'three'
 import gsap from 'gsap'
 import { useGesture } from '@use-gesture/react'
 import { createDrop } from '../../utils/createDrop'
 import { animateBeeFly } from '../../utils/animateBeeFly'
-import { useControls } from 'leva'
 import VoxelBulbasaur from '../VoxelBulbasaur'
 
 const GardenScene = () => {
-  const { scene, size, viewport, camera } = useThree() // cần có để add/remove drop
+  const { scene, size, viewport } = useThree() // cần có để add/remove drop
   const groupPotRef = useRef()
-  const initialGroupPotPos = useRef([7.2, 0.8, 0]) // vị trí gốc
+  const initialGroupPotPos = useRef([7.2, 0.8, 0])
 
   const pouringInterval = useRef(null)
   const waterDrops = useRef([])
 
   const beeRef = useRef()
-  const initialBeePos = useRef([-6.3, -3, -1.6])
+  const initialBeePos = useRef([-6.7, -3, -1.6])
   const [hasBeeFlown, setHasBeeFlown] = useState(false)
 
   const bulbaRef = useRef()
-  const initialBulbaPos = useRef([3.3, -4.3, -0.3])
+  const initialBulbaPos = useRef([2.8, -4.3, -0.3])
   const [hasBulbaGrown, setHasBulbaGrown] = useState(false)
 
   // <---handle pouring functions
@@ -147,18 +146,14 @@ const GardenScene = () => {
 
   return (
     <>
-      {/* oxyz */}
-      <axesHelper args={[5]} />
-      <gridHelper args={[10, 10]} />
-
       <PerspectiveCamera makeDefault position={[0, 0, 12]} />
       <ambientLight intensity={1} />
       <directionalLight position={[10, 10, 10]} intensity={0.5} />
 
       <group>
-        <VoxelFlowers scale={3.5} position={[-5, -4, 0]} />
-        <VoxelFlowers scale={3.6} position={[0, -4, 0]} />
-        <VoxelFlowers scale={3.4} position={[6, -4, 0]} />
+        <VoxelFlowers scale={3.5} position={[-5.3, -4, 0]} />
+        <VoxelFlowers scale={3.6} position={[-0.48, -4, 0]} />
+        <VoxelFlowers scale={3.4} position={[5.5, -4, 0]} />
       </group>
 
       <VoxelWateringPot

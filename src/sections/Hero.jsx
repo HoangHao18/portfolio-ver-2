@@ -3,7 +3,6 @@ import { Suspense } from 'react'
 import CanvasLoader from '../components/General/CanvasLoader'
 import { PerspectiveCamera } from '@react-three/drei'
 import RetroComputer from '../components/RetroComputer'
-import { Leva } from 'leva'
 import { useMediaQuery } from 'react-responsive'
 import { calculateSizes } from '../constants'
 import VoxelRobot from '../components/VoxelRobot'
@@ -14,44 +13,6 @@ import HeroCamera from '../components/HeroCamera'
 import Button from '../components/General/Button'
 
 const Hero = () => {
-  // const controls = useControls('RetroComputer', {
-  //   positionX: {
-  //     value: 0,
-  //     min: -10,
-  //     max: 30,
-  //   },
-  //   positionY: {
-  //     value: 0,
-  //     min: -10,
-  //     max: 10,
-  //   },
-  //   positionZ: {
-  //     value: 0,
-  //     min: -10,
-  //     max: 10,
-  //   },
-  //   rotationX: {
-  //     value: 0,
-  //     min: -10,
-  //     max: 10,
-  //   },
-  //   rotationY: {
-  //     value: 0,
-  //     min: -10,
-  //     max: 10,
-  //   },
-  //   rotationZ: {
-  //     value: 0,
-  //     min: -10,
-  //     max: 10,
-  //   },
-  //   scale: {
-  //     value: 4,
-  //     min: -10,
-  //     max: 10,
-  //   },
-  // })
-
   // Use media queries to determine screen size
   const isSmall = useMediaQuery({ maxWidth: 440 })
   const isMobile = useMediaQuery({ maxWidth: 768 })
@@ -69,9 +30,6 @@ const Hero = () => {
       </div>
 
       <div className="w-full h-full absolute inset-0">
-        {/* controller */}
-        <Leva hidden />
-
         <Canvas className="w-full h-full">
           <Suspense fallback={<CanvasLoader />}>
             <PerspectiveCamera makeDefault position={[0, 0, 20]} />
