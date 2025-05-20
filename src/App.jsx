@@ -1,6 +1,7 @@
 import About from './sections/About'
 import Hero from './sections/Hero'
 import Navbar from './sections/Navbar'
+import Project from './sections/Project'
 
 function App() {
   return (
@@ -8,6 +9,7 @@ function App() {
       <Navbar />
       <Hero />
       <About />
+      <Project />
     </main>
   )
 }

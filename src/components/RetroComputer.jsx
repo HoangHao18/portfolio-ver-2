@@ -6,12 +6,11 @@ Source: https://sketchfab.com/3d-models/retro-computer-pc-low-poly-3d-model-980e
 Title: Retro Computer - PC Low Poly 3D Model
 */
 
-import React, { useRef } from 'react'
-import { useGLTF, useTexture } from '@react-three/drei'
+import { useGLTF } from '@react-three/drei'
 
 const RetroComputer = (props) => {
   const { nodes, materials } = useGLTF('/models/retro_computer.glb')
-  const screenTexture = useTexture('/textures/screen.png')
+  // const screenTexture = useTexture('/textures/summer1.png')
   return (
     <group {...props} dispose={null}>
       <mesh

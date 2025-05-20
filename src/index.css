@@ -94,28 +94,22 @@ body {
     @apply text-[#afb0b6] text-base font-generalsans;
   }
 
-
-  /* not use */
-
-  .head-text {
+   /* projects section  */
+   .head-text {
     @apply sm:text-4xl text-3xl font-semibold bg-gradient-to-r from-[#BEC1CF] from-60% via-[#D5D8EA] via-60% to-[#D5D8EA] to-100% bg-clip-text text-transparent;
   }
 
+   .arrow-btn {
+    @apply w-10 h-10 p-3 cursor-pointer active:scale-95 transition-all rounded-full;
+  }
+
+  .tech-logo {
+    @apply w-10 h-10 rounded-md p-2 bg-neutral-100/10 backdrop-filter backdrop-blur-lg flex justify-center items-center;
+  }
+
+  /* not use */
+
   
-  
-
- 
-
-  
-
-  /* projects section  */
-  /* .arrow-btn {
-    @apply w-10 h-10 p-3 cursor-pointer active:scale-95 transition-all rounded-full arrow-gradient;
-  } */
-
-  /* .tech-logo {
-    @apply w-10 h-10 rounded-md p-2 bg-neutral-100 bg-opacity-10 backdrop-filter backdrop-blur-lg flex justify-center items-center;
-  } */
 
   /* clients section */
   .client-container {
@@ -191,7 +185,7 @@ body {
   display: inline-block;
 }
 
-.arrow-gradient {
+/* .arrow-gradient {
   background-image: linear-gradient(
     to right,
     rgba(255, 255, 255, 0.1) 10%,
@@ -199,7 +193,7 @@ body {
     rgba(255, 255, 255, 0.000025) 50%,
     rgba(255, 255, 255, 0.025) 100%
   );
-}
+} */
 
 @keyframes wave-animation {
   0% {
@@ -228,14 +222,5 @@ body {
   }
 }
 
-/* use */
-.custom-dashed-border {
-  border: 3px dashed transparent;
-  border-image: conic-gradient(
-    from 0deg,
-    white 0deg 10deg,
-    transparent 10deg 20deg
-  ) 1;
-}
 
 

@@ -51,3 +51,64 @@ export const contactInfo = {
 }
 
 export const resumeLink = "/assets/HoangThiHao-Resume.pdf"
+
+export const myProjects = [
+  {
+    title: 'iPhone 15 Pro 3D Product Showcase',
+    desc: 'A faithful recreation of the iPhone 15 Pro product page, inspired by Apple’s style. Combines smooth GSAP animations with interactive 3D visuals using Three.js.',
+    subdesc: 'Built with React, Tailwind CSS, GSAP, and React Three Fiber.',
+    linkDemo: 'https://apple-website-gules-rho.vercel.app/',
+    linkSource: "https://github.com/HoangHao18/apple-website",
+    texture: '/textures/iphone_web.mp4',
+    spotlight: '/assets/spotlight1.png',
+    tags: [
+      {
+        id: 1,
+        name: 'React.js',
+        path: '/assets/react.svg',
+      },
+      {
+        id: 2,
+        name: 'TailwindCSS',
+        path: '/assets/tailwindcss.png',
+      },
+      {
+        id: 3,
+        name: 'ThreeFiber',
+        path: '/assets/threefiber.png',
+      },
+      //  {
+      //   id: 4,
+      //   name: 'ThreeDrei',
+      //   path: '/assets/threedrei.png',
+      // },
+       {
+        id: 3,
+        name: 'GSAP',
+        path: '/assets/gsap.png',
+      }
+    ],
+  },
+  {
+    title: 'PerfumeStore WEB',
+    desc: 'A basic e-commerce website UI for selling perfumes, featuring a user-friendly interface. Includes essential functionalities such as product collections, detailed product pages, shopping cart, and user login system to provide efficient online shopping experience.',
+    subdesc:"Built with React and scss.",
+    linkDemo: 'https://hoanghao18.github.io/DC-UI-PerfumeShop/',
+    linkSource: "https://github.com/HoangHao18/DC-UI-PerfumeShop",
+    texture: '/textures/perfume_web.mp4',
+    spotlight: '/assets/spotlight2.png',
+    tags: [
+      {
+        id: 1,
+        name: 'React.js',
+        path: '/assets/react.svg',
+      },
+      {
+        id: 2,
+        name: 'SCSS',
+        path: '/assets/scss.png',
+      }
+    ],
+  }
+
+]
