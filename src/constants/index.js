@@ -47,7 +47,9 @@ export const aboutInfo = {
 }
 
 export const contactInfo = {
-  gmail: "hoanghao18101999@gmail.com"
+  gmail: "hoanghao18101999@gmail.com",
+  linkedin: "https://www.linkedin.com/in/hoanghao99",
+  github: "https://github.com/hoanghao18"
 }
 
 export const resumeLink = "/assets/HoangThiHao-Resume.pdf"
