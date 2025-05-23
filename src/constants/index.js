@@ -114,3 +114,22 @@ export const myProjects = [
   }
 
 ]
+
+export const workExperiences = [
+  {
+    id: 1,
+    name: 'NEXON Dev VINA',
+    pos: 'Frontend Developer',
+    duration: 'April 2022 - April 2025',
+    title: "Developed and maintained back-office systems, including a translation data management website, a translation support platform, and a task management system for QA.",
+    icon: '/assets/c_nexon.png'
+  }, 
+  {
+    id: 2,
+    name: 'SUMVIET Company',
+    pos: 'Frontend Developer Intern',
+    duration: 'May 2021 - August 2021',
+    title: "Assisted in building front-end components and integration REST APIs for Ecommerce projects.",
+    icon: '/assets/c_sumviet.png',
+
+  }]
