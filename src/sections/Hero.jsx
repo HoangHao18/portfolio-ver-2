@@ -7,27 +7,21 @@ import { useMediaQuery } from 'react-responsive'
 import { calculateSizes } from '../constants'
 import VoxelRobot from '../components/VoxelRobot'
 import VoxelMug from '../components/VoxelMug'
-import VoxelPluto from '../components/VoxelPluto'
-import VoxelReactLogo from '../components/VoxelReactLogo'
-import HeroCamera from '../components/HeroCamera'
+import HeroCamera from '../components/Hero/HeroCamera'
 import Button from '../components/General/Button'
+import StringAnimate from '../components/Hero/StringAnimate'
 
 const Hero = () => {
   // Use media queries to determine screen size
-  const isSmall = useMediaQuery({ maxWidth: 440 })
-  const isMobile = useMediaQuery({ maxWidth: 768 })
-  const isTablet = useMediaQuery({ minWidth: 768, maxWidth: 1024 })
+  const isSmall = useMediaQuery({ maxWidth: 639 })
+  const isMobile = useMediaQuery({ maxWidth: 767 })
+  const isTablet = useMediaQuery({ minWidth: 768, maxWidth: 1280 }) //1024
 
   const sizes = calculateSizes(isSmall, isMobile, isTablet)
 
   return (
     <section className="min-h-screen w-full flex flex-col relative">
-      <div className="w-full mx-auto flex flex-col sm:mt-36 mt-20 c-space gap-3 z-5">
-        <p className="sm:text-3xl text-xl font-medium text-white text-center font-generalsans">
-          Hi, I am Hoang Hao
-        </p>
-        <p className="hero_tag text-gray_gradient">Front-End Developer</p>
-      </div>
+      <StringAnimate />
 
       <div className="w-full h-full absolute inset-0">
         <Canvas className="w-full h-full">
@@ -45,8 +39,6 @@ const Hero = () => {
             </HeroCamera>
 
             <group>
-              <VoxelPluto position={sizes.plutoPosition} scale={sizes.plutoScale} />
-              <VoxelReactLogo position={sizes.reactLogoPosition} scale={sizes.reactLogocale} />
               <VoxelMug
                 position={sizes.mugPosition}
                 scale={sizes.mugScale}

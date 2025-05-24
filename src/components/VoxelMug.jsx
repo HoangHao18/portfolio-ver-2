@@ -23,7 +23,7 @@ const VoxelMug = (props) => {
   //     })
   //   })
   return (
-    <Float floatIntensity={1}>
+    <Float floatIntensity={1} rotationIntensity={0.5} floatingRange={[0.1, 0.5]}>
       <group {...props} dispose={null} ref={targetRef}>
         <group rotation={[-Math.PI / 2, 0, 0]}>
           <group position={[0, 0, 9]}>

@@ -64,6 +64,10 @@ body {
     @apply text-center xl:text-6xl md:text-5xl sm:text-4xl text-3xl font-generalsans font-black !leading-normal;
   }
 
+  .animate_text {
+    @apply relative xl:w-[46px] xl:h-[46px] md:w-[38px] md:h-[38px] sm:w-[28px] sm:h-[28px] w-[22px] h-[22px] inline-block perspective-[600px];
+  }
+
   /* button component */
   .btn {
     @apply flex gap-4 items-center justify-center cursor-pointer p-3 rounded-md bg-black-300  transition-all active:scale-95 text-white mx-auto;

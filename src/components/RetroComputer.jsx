@@ -6,11 +6,20 @@ Source: https://sketchfab.com/3d-models/retro-computer-pc-low-poly-3d-model-980e
 Title: Retro Computer - PC Low Poly 3D Model
 */
 
-import { useGLTF } from '@react-three/drei'
+import { useGLTF, useTexture, useVideoTexture } from '@react-three/drei'
+import * as THREE from 'three'
 
 const RetroComputer = (props) => {
   const { nodes, materials } = useGLTF('/models/retro_computer.glb')
-  // const screenTexture = useTexture('/textures/summer1.png')
+  //const txt = useVideoTexture('/textures/perfume_web.mp4')
+  const screenTexture = useTexture('/textures/screen.png')
+  // Flip ngang (trục X)
+  screenTexture.wrapS = THREE.RepeatWrapping
+  screenTexture.repeat.x = -1
+
+  // Flip dọc (trục Y)
+  // screenTexture.wrapT = THREE.RepeatWrapping
+  // screenTexture.repeat.y = -1
   return (
     <group {...props} dispose={null}>
       <mesh
@@ -30,6 +39,20 @@ const RetroComputer = (props) => {
       <mesh
         castShadow
         receiveShadow
+        geometry={nodes.Object_25.geometry}
+        material={materials.material_0}
+        position={[0.188, 0, -0.75]}
+      />
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={nodes.Object_27.geometry}
+        material={materials.material_0}
+        position={[-0.75, 0, -0.625]}
+      />
+      <mesh
+        castShadow
+        receiveShadow
         geometry={nodes.Object_9.geometry}
         material={materials.material_0}
         position={[0.063, 0.5, 0.438]}
@@ -39,38 +62,36 @@ const RetroComputer = (props) => {
         receiveShadow
         geometry={nodes.Object_11.geometry}
         material={materials.material_0}
-        position={[0.063, 0.563, 0.313]}
+        position={[0.063, 0.563, 0.312]}
       />
       <mesh
         castShadow
         receiveShadow
         geometry={nodes.Object_13.geometry}
         material={materials.material_0}
-        position={[0.063, 1.5, 0.313]}
+        position={[0.063, 1.5, 0.312]}
       />
       <mesh
         castShadow
         receiveShadow
         geometry={nodes.Object_15.geometry}
         material={materials.material_0}
-        position={[0.063, 1.313, 0.313]}
+        position={[0.063, 1.313, 0.312]}
       />
       <mesh
         castShadow
         receiveShadow
         geometry={nodes.Object_17.geometry}
         material={materials.material_0}
-        position={[-1.031, 1.313, 0.313]}
+        position={[-1.031, 1.313, 0.312]}
       />
       <mesh
         castShadow
         receiveShadow
         geometry={nodes.Object_19.geometry}
         material={materials.material_0}
-        position={[-0.094, 1.313, 0.313]}
-      >
-        {/* <meshMatcapMaterial map={screenTexture} /> */}
-      </mesh>
+        position={[-0.094, 1.313, 0.312]}
+      />
       <mesh
         castShadow
         receiveShadow
@@ -88,21 +109,18 @@ const RetroComputer = (props) => {
       <mesh
         castShadow
         receiveShadow
-        geometry={nodes.Object_25.geometry}
-        material={materials.material_0}
-        position={[0.188, 0, -0.75]}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.Object_27.geometry}
-        material={materials.material_0}
-        position={[-0.75, 0, -0.625]}
-      />
+        geometry={nodes.Plane.geometry}
+        material={nodes.Plane.material}
+        position={[0.563, 1.118, 0.585]}
+        rotation={[-Math.PI / 2, 0, 0]}
+        scale={[0.888, 1, 0.707]}
+      >
+        {/* <meshBasicMaterial map={txt} /> */}
+        <meshMatcapMaterial map={screenTexture} />
+      </mesh>
     </group>
   )
 }
 
 useGLTF.preload('/models/retro_computer.glb')
-
 export default RetroComputer
